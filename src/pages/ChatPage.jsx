@@ -8,20 +8,17 @@ export default function ChatPage() {
     const [appId, setAppId] = useState(null);
 
     useEffect(() => {
-        // 1. Сначала создаем (или ищем) заявку, чтобы было где чатиться
         const initChat = async () => {
             try {
-                // Создаем "техническую" заявку для чата
                 const res = await api.post('/applications', {
-                    // Минимум данных для CreateApplicationDTO
-                    client_user_id: 1, // Тут надо брать ID из токена по-хорошему, но пока так
+                    client_user_id: 1,
                     product_type: 'bank_guarantee',
                     amount: 1000,
                     term_days: 30,
-                    bank_ids: [1], // ID банка из Fixtures
+                    bank_ids: [1],
                     product_data: { client_inn: '0000000000' }
                 });
-                
+
                 const id = res.data.created_ids[0];
                 setAppId(id);
                 loadMessages(id);
@@ -44,7 +41,16 @@ export default function ChatPage() {
             body: text
         });
         setText('');
-        loadMessages(appId); // Обновляем список
+        loadMessages(appId);
+    };
+
+    const moderateMessage = async (id, action) => {
+        try {
+            await api.post(`/admin/chat/messages/${id}/${action}`);
+            loadMessages(appId);
+        } catch (e) {
+            alert('Ошибка модерации: ' + (e.response?.data?.error || e.message));
+        }
     };
 
     if (!appId) return <div className="p-8">Инициализация чата...</div>;
@@ -52,26 +58,53 @@ export default function ChatPage() {
     return (
         <div className="p-8 max-w-2xl mx-auto h-screen flex flex-col">
             <h1 className="text-2xl font-bold mb-4">Чат с менеджером (Заявка #{appId})</h1>
-            
+
             <div className="flex-1 border rounded p-4 overflow-y-auto mb-4 bg-gray-50">
                 {messages.length === 0 && <p className="text-gray-400 text-center">Нет сообщений</p>}
                 {messages.map((msg) => (
-                    <div key={msg.id} className={`mb-2 p-3 rounded max-w-[80%] ${
-                        msg.sender_user.role === 'admin' 
-                            ? 'bg-blue-100 ml-auto' // Сообщения админа справа (условно)
-                            : 'bg-white border'     // Твои слева
-                    }`}>
-                        <p className="font-bold text-xs text-gray-500">{msg.sender_user.fio}</p>
-                        <p>{msg.body}</p>
-                        <span className="text-xs text-gray-400">
-                            {msg.moderation_status === 'pending' ? '⏳ На проверке' : '✅'}
+                    <div key={msg.id} className={`mb-3 p-4 rounded-lg max-w-[80%] ${msg.sender_user.role === 'admin'
+                            ? 'bg-blue-100 ml-auto'
+                            : 'bg-white border shadow-sm'
+                        }`}>
+                        <p className="font-bold text-xs text-gray-500 mb-1">{msg.sender_user.fio}</p>
+                        <p className="text-gray-800">{msg.body}</p>
+
+                        {/* Индикатор pending */}
+                        {msg.moderation_status === 'pending' && (
+                            <div className="mt-2">
+                                <span className="text-xs bg-yellow-50 text-yellow-700 px-2 py-1 rounded-full border border-yellow-200">
+                                    ⏳ На модерации
+                                </span>
+                            </div>
+                        )}
+
+                        {/* Кнопки модерации для админа */}
+                        {msg.moderation_status === 'pending' && (
+                            <div className="mt-3 flex gap-2">
+                                <button
+                                    onClick={() => moderateMessage(msg.id, 'approve')}
+                                    className="text-xs flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                                >
+                                    ✓ Одобрить
+                                </button>
+                                <button
+                                    onClick={() => moderateMessage(msg.id, 'reject')}
+                                    className="text-xs flex items-center gap-1 px-3 py-1.5 bg-white border border-red-200 text-red-600 rounded-lg hover:bg-red-50"
+                                >
+                                    ✗ Отклонить
+                                </button>
+                            </div>
+                        )}
+
+                        <span className="text-xs text-gray-400 block mt-1">
+                            {new Date(msg.created_at).toLocaleTimeString()}
                         </span>
                     </div>
                 ))}
             </div>
 
             <div className="flex gap-2">
-                <input 
+                <input
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Введите сообщение..."

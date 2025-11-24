@@ -1,0 +1,48 @@
+import { create } from 'zustand';
+import { User } from '@shared/types/models';
+import { authApi } from '../api/authApi';
+
+interface AuthState {
+    user: User | null;
+    token: string | null;
+    isLoading: boolean;
+    setUser: (user: User | null) => void;
+    setToken: (token: string | null) => void;
+    setLoading: (loading: boolean) => void;
+    logout: () => void;
+    fetchUser: () => Promise<void>;
+}
+
+export const useAuthStore = create<AuthState>((set) => ({
+    user: null,
+    token: localStorage.getItem('token'),
+    isLoading: true,
+
+    setUser: (user) => set({ user }),
+
+    setToken: (token) => {
+        if (token) {
+            localStorage.setItem('token', token);
+        } else {
+            localStorage.removeItem('token');
+        }
+        set({ token });
+    },
+
+    setLoading: (isLoading) => set({ isLoading }),
+
+    logout: () => {
+        localStorage.removeItem('token');
+        set({ user: null, token: null });
+        window.location.href = '/login';
+    },
+
+    fetchUser: async () => {
+        try {
+            const user = await authApi.getProfile();
+            set({ user });
+        } catch (error) {
+            console.error('Failed to fetch user profile:', error);
+        }
+    },
+}));

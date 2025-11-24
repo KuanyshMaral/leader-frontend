@@ -1,0 +1,208 @@
+﻿|-- public
+|   |-- vite.svg
+|-- src
+|   |-- api
+|   |   |-- axios.js
+|   |-- app
+|   |   |-- components
+|   |   |   |-- ProtectedRoute.tsx
+|   |   |-- App.tsx
+|   |   |-- providers.tsx
+|   |   |-- router.tsx
+|   |-- components
+|   |   |-- modals
+|   |   |   |-- ReplaceDocModal.jsx
+|   |   |   |-- UploadDocModal.jsx
+|   |   |-- Table
+|   |   |   |-- StatusBadge.jsx
+|   |   |-- Button.jsx
+|   |   |-- ChatWidget.jsx
+|   |   |-- Input.jsx
+|   |   |-- Layout.jsx
+|   |   |-- Toggle.jsx
+|   |-- constants
+|   |   |-- docTypes.js
+|   |-- context
+|   |   |-- AuthContext.jsx
+|   |-- features
+|   |   |-- admin
+|   |   |   |-- pages
+|   |   |   |   |-- AdminChatPage.tsx
+|   |   |   |   |-- AdminCreatePartnerPage.tsx
+|   |   |   |   |-- AdminUsersPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- agent
+|   |   |   |-- pages
+|   |   |   |   |-- AgentContractPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- applications
+|   |   |   |-- api
+|   |   |   |   |-- applicationsApi.ts
+|   |   |   |-- components
+|   |   |   |   |-- ApplicationFilters.tsx
+|   |   |   |   |-- ApplicationTable.tsx
+|   |   |   |   |-- StatusBadge.tsx
+|   |   |   |-- hooks
+|   |   |   |   |-- useApplication.ts
+|   |   |   |   |-- useApplications.ts
+|   |   |   |   |-- useCreateApplication.ts
+|   |   |   |-- pages
+|   |   |   |   |-- ApplicationDetailPage.tsx
+|   |   |   |   |-- ApplicationsListPage.tsx
+|   |   |   |   |-- CreateApplicationPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- auth
+|   |   |   |-- api
+|   |   |   |   |-- authApi.ts
+|   |   |   |-- components
+|   |   |   |   |-- LoginForm.tsx
+|   |   |   |   |-- RegisterForm.tsx
+|   |   |   |-- hooks
+|   |   |   |   |-- useAuth.ts
+|   |   |   |   |-- useLogin.ts
+|   |   |   |   |-- useRegister.ts
+|   |   |   |-- pages
+|   |   |   |   |-- LoginPage.tsx
+|   |   |   |   |-- RegisterPage.tsx
+|   |   |   |-- store
+|   |   |   |   |-- authStore.ts
+|   |   |   |-- index.ts
+|   |   |-- calculator
+|   |   |   |-- pages
+|   |   |   |   |-- CalculatorPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- callbase
+|   |   |   |-- api
+|   |   |   |   |-- callBaseApi.ts
+|   |   |   |-- pages
+|   |   |   |   |-- CallBasePage.tsx
+|   |   |   |-- index.ts
+|   |   |-- chat
+|   |   |   |-- components
+|   |   |   |   |-- ChatWidget.tsx
+|   |   |   |-- pages
+|   |   |   |   |-- ChatPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- clients
+|   |   |   |-- api
+|   |   |   |   |-- clientsApi.ts
+|   |   |   |-- components
+|   |   |   |   |-- ClientApplications.tsx
+|   |   |   |   |-- ClientDocuments.tsx
+|   |   |   |   |-- ClientInfo.tsx
+|   |   |   |-- hooks
+|   |   |   |   |-- useClients.ts
+|   |   |   |-- pages
+|   |   |   |   |-- ClientDetailPage.tsx
+|   |   |   |   |-- ClientsPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- company
+|   |   |   |-- pages
+|   |   |   |   |-- CompanyPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- dashboard
+|   |   |   |-- pages
+|   |   |   |   |-- DashboardPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- documents
+|   |   |   |-- api
+|   |   |   |   |-- documentsApi.ts
+|   |   |   |-- hooks
+|   |   |   |   |-- useDocuments.ts
+|   |   |   |   |-- useUploadDocument.ts
+|   |   |   |-- pages
+|   |   |   |   |-- DocumentsPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- news
+|   |   |   |-- api
+|   |   |   |   |-- newsApi.ts
+|   |   |   |-- hooks
+|   |   |   |   |-- useNews.ts
+|   |   |   |-- pages
+|   |   |   |   |-- NewsPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- partner
+|   |   |   |-- pages
+|   |   |   |   |-- PartnerAgentsPage.tsx
+|   |   |   |   |-- PartnerApplicationsPage.tsx
+|   |   |   |   |-- PartnerBankPage.tsx
+|   |   |   |   |-- PartnerClientsPage.tsx
+|   |   |   |-- index.ts
+|   |   |-- settings
+|   |   |   |-- api
+|   |   |   |   |-- index.ts
+|   |   |   |-- pages
+|   |   |   |   |-- SettingsPage.tsx
+|   |   |   |-- index.ts
+|   |-- hooks
+|   |   |-- useFileUpload.js
+|   |-- pages
+|   |   |-- admin
+|   |   |   |-- AdminChatPage.jsx
+|   |   |   |-- AdminCreatePartnerPage.jsx
+|   |   |   |-- AdminUsersPage.jsx
+|   |   |-- partner
+|   |   |   |-- PartnerAgentsPage.jsx
+|   |   |   |-- PartnerApplicationsPage.jsx
+|   |   |   |-- PartnerBankPage.jsx
+|   |   |   |-- PartnerClientsPage.jsx
+|   |   |-- AgentContractPage.jsx
+|   |   |-- ApplicationDetailPage.jsx
+|   |   |-- ApplicationsPage.jsx
+|   |   |-- CalculatorPage.jsx
+|   |   |-- CallBasePage.jsx
+|   |   |-- ChatPage.jsx
+|   |   |-- ClientDetailPage.jsx
+|   |   |-- ClientsPage.jsx
+|   |   |-- CompanyPage.jsx
+|   |   |-- CreateApplicationPage.jsx
+|   |   |-- Dashboard.jsx
+|   |   |-- DocumentsPage.jsx
+|   |   |-- LoginPage.jsx
+|   |   |-- NewsPage.jsx
+|   |   |-- RegisterPage.jsx
+|   |   |-- SettingsPage.jsx
+|   |-- shared
+|   |   |-- api
+|   |   |   |-- client.ts
+|   |   |-- components
+|   |   |   |-- layout
+|   |   |   |   |-- AppLayout.tsx
+|   |   |   |-- modals
+|   |   |   |   |-- ReplaceDocModal.tsx
+|   |   |   |   |-- UploadDocModal.tsx
+|   |   |   |-- ui
+|   |   |   |   |-- Badge.tsx
+|   |   |   |   |-- Button.tsx
+|   |   |   |   |-- index.ts
+|   |   |   |   |-- Input.tsx
+|   |   |   |   |-- Spinner.tsx
+|   |   |   |   |-- StatusBadge.tsx
+|   |   |-- constants
+|   |   |   |-- docTypes.ts
+|   |   |-- hooks
+|   |   |   |-- useDebounce.ts
+|   |   |   |-- useFileUpload.ts
+|   |   |-- lib
+|   |   |   |-- constants.ts
+|   |   |   |-- formatters.ts
+|   |   |-- types
+|   |   |   |-- enums.ts
+|   |   |   |-- models.ts
+|   |-- App.jsx
+|   |-- index.css
+|   |-- main.jsx
+|   |-- main.tsx
+|-- .gitignore
+|-- eslint.config.js
+|-- index.html
+|-- make-structure.ps1
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.js
+|-- README.md
+|-- structure.txt
+|-- tailwind.config.js
+|-- tsconfig.json
+|-- tsconfig.node.json
+|-- vite.config.ts
