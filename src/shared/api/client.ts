@@ -1,9 +1,14 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import { ApiError } from '@shared/types/models';
 
+// Get API URL from environment variable
+// In development: uses Vite proxy ('/api' -> 'http://localhost:8080')
+// In production: uses VITE_API_URL from .env.production
+const apiUrl = import.meta.env.VITE_API_URL || '/api';
+
 // Create axios instance
 export const apiClient: AxiosInstance = axios.create({
-    baseURL: '/api',
+    baseURL: apiUrl,
     headers: {
         'Content-Type': 'application/json',
     },
